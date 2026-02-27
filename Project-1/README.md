@@ -13,7 +13,7 @@ list.out and new.out were usually the slowest in my tests, especially in the uno
 
 Still, the slowest program was not always the same. In larger optimized runs, alloca.out was sometimes slightly slower than the others. So there was a pattern, but not one program that was always the slowest in every test.
 
----
+
 
 ## 3. Was there a trend in program execution time based on the size of data in each Node? If so, what, and why?
 
@@ -28,7 +28,7 @@ For example, with OPT="-O2 -g2" and 100,000 blocks:
 
 This makes sense because each node contains more bytes that must be allocated, initialized, and processed by the hash computation. More data per node means more memory traffic and more work for the CPU.
 
----
+
 
 ## 4. Was there a trend in program execution time based on the length of the block chain?
 
@@ -42,7 +42,7 @@ Using the optimized build with larger node data:
 
 This trend is expected because a longer linked list means more nodes must be created and more bytes must be hashed. Increasing the number of blocks increases the total amount of work.
 
----
+
 
 ## 5. Consider heap breaks, what's noticeable? Does increasing the stack size affect the heap? Speculate on any similarities and differences in programs?
 
