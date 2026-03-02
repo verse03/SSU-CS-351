@@ -1,10 +1,126 @@
 # Project 1 Analysis and Reporting -Bryan Dang
 
+## Experimental Results
+
+
+## Baseline Configuration
+
+`OPT="-O2 -g2"` `MIN_BYTES=3` `MAX_BYTES=100` `NUM_BLOCKS=100000`
+
+### Runtime Results
+
+| Program | Time (s) | Memory (KB) |
+|---|---:|---:|
+| alloca | 0.02 | 12112 |
+| list | 0.03 | 14984 |
+| malloc | 0.02 | 12104 |
+| new | 0.03 | 14984 |
+
+
+
+## Optimization Comparison (No Optimization)
+
+`OPT="-g"` `MIN_BYTES=3` `MAX_BYTES=100` `NUM_BLOCKS=100000`
+
+| Program | Time (s) | Memory (KB) |
+|---|---:|---:|
+| alloca | 0.05 | 23048 |
+| list | 0.14 | 14976 |
+| malloc | 0.04 | 12100 |
+| new | 0.13 | 14976 |
+
+
+
+## Payload Size Experiment
+
+`OPT="-O2 -g2"`  
+`NUM_BLOCKS=100000`
+
+### Payload = 10 bytes
+
+`MIN_BYTES=10` `MAX_BYTES=10`
+
+| Program | Time (s) | Memory (KB) |
+|---|---:|---:|
+| alloca | 0.01 | 8648 |
+| list | 0.02 | 10944 |
+| malloc | 0.01 | 8640 |
+| new | 0.02 | 10944 |
+
+### Payload = 1000 bytes
+
+`MIN_BYTES=1000` `MAX_BYTES=1000`
+
+| Program | Time (s) | Memory (KB) |
+|---|---:|---:|
+| alloca | 0.29 | 153804 |
+| list | 0.30 | 156096 |
+| malloc | 0.28 | 153792 |
+| new | 0.28 | 156112 |
+
+
+
+## Chain Length Experiment
+
+`OPT="-O2 -g2"`  
+`MIN_BYTES=1000`  
+`MAX_BYTES=1000`
+
+### 10,000 Nodes
+
+| Program | Time (s) | Memory (KB) |
+|---|---:|---:|
+| alloca | 0.04 | 18432 |
+| list | 0.04 | 18444 |
+| malloc | 0.03 | 18432 |
+| new | 0.03 | 18488 |
+
+### 100,000 Nodes
+
+| Program | Time (s) | Memory (KB) |
+|---|---:|---:|
+| alloca | 0.30 | 153792 |
+| list | 0.29 | 156104 |
+| malloc | 0.28 | 153800 |
+| new | 0.29 | 156100 |
+
+### 1,000,000 Nodes
+
+| Program | Time (s) | Memory (KB) |
+|---|---:|---:|
+| alloca | 2.85 | 1506240 |
+| list | 2.79 | 1529856 |
+| malloc | 2.63 | 1506240 |
+| new | 2.73 | 1529864 |
+
+
+## Heap Break Experiment
+
+### 10,000 Nodes
+
+| Program | Heap Breaks |
+|---|---:|
+| alloca | 3 |
+| list | 119 |
+| malloc | 117 |
+| new | 119 |
+
+### 100,000 Nodes
+
+| Program | Heap Breaks |
+|---|---:|
+| alloca | 3 |
+| list | 1159 |
+| malloc | 1142 |
+| new | 1159 |
+
+
+
 ## 1. Which program is fastest? Is it always the fastest?
 
-Based on my tests, malloc.out was usually the fastest overall, especially for larger runs. For example, with OPT="-O2 -g2" and 1,000,000 blocks, malloc.out finished in 2.63 s, which was slightly faster than the other versions.
+Based on my tests, malloc.out was usually the fastest overall, especially for larger runs. For example, with OPT="-O2 -g2" and 1,000,000 blocks, malloc.out finished in 2.63 s, which was slightly faster than the other versions. However, it was not always the fastest. In some smaller tests, alloca.out performed just as well or slightly better. So the fastest program depends on the build settings and the workload size.
 
-However, it was not always the fastest. In some smaller tests, alloca.out performed just as well or slightly better. So the fastest program depends on the build settings and the workload size.
+
 
 
 ## 2. Which program is slowest? Is it always the slowest?
